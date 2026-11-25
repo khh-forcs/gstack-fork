@@ -29,6 +29,7 @@ gstack 저장소가 문서와 폴더 구조를 어떤 기준과 의도로 만들
 |---|---|---|
 | 01 | gstack에 있는 문서 관리 규칙 전체 개요 | [01-doc-rules-overview.md](01-doc-rules-overview.md) |
 | 02 | SKILL.md.tmpl 템플릿 형식을 쓰는 이유 | [02-skill-template-reason.md](02-skill-template-reason.md) |
+| 03 | 구현 중 알게 된 사실로 분석·설계 문서를 고쳐야 할 때 | [03-implementation-feedback-to-design.md](03-implementation-feedback-to-design.md) |
 
 ## 결정 현황
 
@@ -40,3 +41,4 @@ gstack 저장소가 문서와 폴더 구조를 어떤 기준과 의도로 만들
 | D4 | 기획 → 설계 → 구현 결과물을 서로 어떻게 연결할지 | 세 단계 결과물이 서로 다른 저장소와 공간에 있어서, 구현이 어떤 기획 요구에서 나왔는지 추적하기 어렵다. | 미정 |
 | D5 | 소통 규칙 파일을 어디에 둘지 | 새 대화마다 읽혀야 한다. | 결정: 두 저장소의 작업 브랜치 `.claude/rules/clear-communication.md`. PR은 만들지 않고 이 세션에서 `/clear`로 이어 간다. |
 | D6 | 질문과 답의 기록을 어디에 둘지 | `/clear`를 하면 대화 내용이 사라진다. | 결정: gstack-fork 작업 브랜치의 이 폴더. 주제별로 파일을 나눈다. |
+| D7 | 구현 중 알게 된 사실을 분석·설계 문서에 어떻게 반영할지 (원문을 고침 / 원문을 두고 변경 기록을 덧붙임) | 원문을 고치면 예전 내용과 바꾼 이유가 사라진다. 문서가 git 밖에 있으면 되돌릴 방법도 없다. 03번 기록 참고. | 미정 |
