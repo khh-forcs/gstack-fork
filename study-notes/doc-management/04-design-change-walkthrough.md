@@ -102,6 +102,24 @@ PR 설명의 `## Plan Completion`에도 미룬 항목으로 적힌다. 설계 �
 - 섹션 제목이 영어 키워드(`Acceptance`, `Success criteria`, `Verification`, `Test plan`, `Testing`, `Done when`, `Definition of done`)로 시작해야 검사한다. `## 완료 기준`이라고 쓰면 이 검사가 찾지 못한다.
 - 계획 문서가 git 저장소 밖에 있으면 기준선이 없다. 이때는 `baseline unavailable`로만 기록하고 비교하지 못한다.
 
+### 확인: 한국어 제목이면 정말 찾지 못하는가
+
+후속 질문: "섹션 제목이 한국어이면 찾지 못한다는 게 사실이야?"
+
+사실이다. 다만 범위가 좁다. 영향을 받는 것은 **완료 기준 수정 검사(ACCEPTANCE_EDITED) 하나뿐**이다.
+
+이 검사는 정규식으로 섹션 제목을 찾는다. 제목을 소문자로 바꾼 뒤 `#` 다음에(번호는 허용) 영어 키워드로 시작하는지 본다. 근거: `scripts/resolvers/plan-gates.ts`의 `ACCEPTANCE_HEADING_PATTERN`. 같은 규칙으로 직접 실행해 본 결과는 다음과 같다.
+
+| 섹션 제목 | 검사 대상 여부 |
+|---|---|
+| `## 완료 기준` | 찾지 못함 |
+| `## 완료 기준 (Acceptance)` | 찾지 못함 (영어 키워드로 시작하지 않음) |
+| `## Acceptance criteria` | 찾음 |
+| `## Acceptance criteria (완료 기준)` | 찾음 |
+| `## 3. Testing` | 찾음 |
+
+계획 항목을 대조하는 일(DONE, CHANGED, NOT DONE 분류)은 정규식이 아니라 Claude가 문서를 읽고 판단한다. 그래서 한국어로 쓴 구현 항목과 완료 기준도 이해하고 대조한다. 한국어 제목 때문에 빠지는 것은 "완료 기준을 고쳤는지 원본과 비교하는 검사"뿐이다.
+
 ## 행동 4. 위 차이들이 다음 작업에 남는 방식
 
 **`/review`가 계획 파일에서 나온 차이를 교훈으로 기록한다.**

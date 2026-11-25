@@ -32,6 +32,8 @@ gstack 저장소가 문서와 폴더 구조를 어떤 기준과 의도로 만들
 | 02 | SKILL.md.tmpl 템플릿 형식을 쓰는 이유 | [02-skill-template-reason.md](02-skill-template-reason.md) |
 | 03 | 구현 중 알게 된 사실로 분석·설계 문서를 고쳐야 할 때 | [03-implementation-feedback-to-design.md](03-implementation-feedback-to-design.md) |
 | 04 | 03번을 예시로 따라가기: 사용자 행동별로 어디에 어떻게 기록하는가 | [04-design-change-walkthrough.md](04-design-change-walkthrough.md) |
+| 05 | 결정 기록에 JSON 형식을 쓰는 이유 | [05-decision-log-format.md](05-decision-log-format.md) |
+| 06 | 설계 변경이 처리되는 흐름: 바뀌는 파일 순서와 호출하는 스킬 순서 | [06-change-flow-files-and-skills.md](06-change-flow-files-and-skills.md) |
 
 ## 결정 현황
 
