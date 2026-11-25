@@ -12,3 +12,8 @@
 | 6 | 사용자 행동에 따라 변경 되는 파일들만 처리 순서대로 보여줘.흐름을 보고 싶어. | [06. 설계 변경이 처리되는 흐름 — 바뀌는 파일 순서](06-change-flow-files-and-skills.md#바뀌는-파일-순서) |
 | 7 | 사용자 행동에 따라 호출 하는 스킬을 순서대로 보여줘. | [06. 설계 변경이 처리되는 흐름 — 호출하는 스킬 순서](06-change-flow-files-and-skills.md#호출하는-스킬-순서) |
 | 8 | 섹션 제목이 한국어 이면 찾지 못한다는게 사실이야? | [04. 확인: 한국어 제목이면 정말 찾지 못하는가](04-design-change-walkthrough.md#확인-한국어-제목이면-정말-찾지-못하는가) |
+| 9 | gstack 은 jsonl 파일을 주로 어떤 목적으로 사용하는지 확인하고, 하나의 jsonl 파일을 동시에 수정하는 경우 각 라인의 순서가 문제가 되는지? 아니면 각 라인의 추가 순서는 중요하지 않은건지? 여러 에이전트가 동시에 읽기,쓰기 하는데 왜 문제가 발생하지 않는다고 했는데 사실인지? | [07. JSONL 기록 — 용도와 동시 쓰기](07-jsonl-stores.md#1-jsonl을-쓰는-곳) |
+| 10 | jsonl 을 프로그램이 필드로 계산하는 동작이 어떻게 진행되는지 궁금해. | [07. JSONL 기록 — 필드로 계산하는 과정](07-jsonl-stores.md#3-필드로-계산하는-과정) |
+| 11 | decisions.jsonl,learnings.jsonl 파일을 사용하는 목적과 json 을 추가하는 순서와 읽는 순서는 어떻게 되어 있어? | [07. JSONL 기록 — decisions.jsonl과 learnings.jsonl](07-jsonl-stores.md#4-decisionsjsonl과-learningsjsonl) |
+| 12 | /ship 단계에서 한꺼번에 정리하는 것이 무엇인지 궁금해. | [06. /ship에서 한꺼번에 정리하는 것](06-change-flow-files-and-skills.md#ship에서-한꺼번에-정리하는-것) |
+| 13 | gstack 에서 정규식으로 섹션 제목을 찾는 이유는 무엇인지 궁금해. | [08. 정규식으로 섹션 제목을 찾는 이유](08-regex-vs-judgment.md) |
