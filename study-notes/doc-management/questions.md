@@ -18,3 +18,4 @@
 | 12 | /ship 단계에서 한꺼번에 정리하는 것이 무엇인지 궁금해. | [06. /ship에서 한꺼번에 정리하는 것](06-change-flow-files-and-skills.md#ship에서-한꺼번에-정리하는-것) |
 | 13 | gstack 에서 정규식으로 섹션 제목을 찾는 이유는 무엇인지 궁금해. | [08. 정규식으로 섹션 제목을 찾는 이유](08-regex-vs-judgment.md) |
 | 14 | gstack 에서 문서 작성에 사용하는 파일의 종류를 보여줘. | [09. gstack이 문서 작성에 쓰는 파일 종류](09-doc-file-types.md) |
+| 15 | md.tmpl 는 왜 사용하는걸까? 어떤 이득이 있지? | [02. 후속: sections/*.md.tmpl까지 포함한 .md.tmpl의 이득](02-skill-template-reason.md#후속-sectionsmdtmpl까지-포함한-mdtmpl의-이득) |

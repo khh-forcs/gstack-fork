@@ -29,7 +29,7 @@ gstack 저장소가 문서와 폴더 구조를 어떤 기준과 의도로 만들
 | 번호 | 주제 | 파일 |
 |---|---|---|
 | 01 | gstack에 있는 문서 관리 규칙 전체 개요 | [01-doc-rules-overview.md](01-doc-rules-overview.md) |
-| 02 | SKILL.md.tmpl 템플릿 형식을 쓰는 이유 | [02-skill-template-reason.md](02-skill-template-reason.md) |
+| 02 | SKILL.md.tmpl 템플릿 형식을 쓰는 이유, sections/*.md.tmpl로 나눠 읽기 | [02-skill-template-reason.md](02-skill-template-reason.md) |
 | 03 | 구현 중 알게 된 사실로 분석·설계 문서를 고쳐야 할 때 | [03-implementation-feedback-to-design.md](03-implementation-feedback-to-design.md) |
 | 04 | 03번을 예시로 따라가기: 사용자 행동별로 어디에 어떻게 기록하는가 | [04-design-change-walkthrough.md](04-design-change-walkthrough.md) |
 | 05 | 결정 기록에 JSON 형식을 쓰는 이유 | [05-decision-log-format.md](05-decision-log-format.md) |

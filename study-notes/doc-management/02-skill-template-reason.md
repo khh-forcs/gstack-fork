@@ -29,3 +29,48 @@ gstack은 왜 SKILL.md를 직접 쓰지 않고 SKILL.md.tmpl 템플릿에서 생
 
 - 핵심 기준은 "사람이 고치는 원본은 하나, 나머지는 원본에서 만든다"이다.
 - 사용자는 개발이 끝난 뒤 docx와 위키를 손으로 다시 쓴다. 이 과정이 gstack이 피하려는 "사본을 손으로 관리하는 상황"에 해당한다. 개발 중 문서를 원본으로 삼고 최종 문서를 거기서 만들 수 있는지가 결정 현황 D2의 핵심 질문이다.
+
+## 후속: `sections/*.md.tmpl`까지 포함한 `.md.tmpl`의 이득
+
+### 질문
+
+`.md.tmpl`은 왜 쓰고, 어떤 이득이 있는가?
+
+### 결론
+
+`.md.tmpl`은 `SKILL.md.tmpl`만이 아니다. 스킬 폴더 48곳에 `sections/*.md.tmpl`이 있고, `autoplan/DRIVER.md.tmpl` 같은 것도 있다. 위의 네 가지 이유에 더해, 이 파일들은 Claude가 한 번에 읽는 분량을 줄인다. 스킬 하나를 본문과 단계별 파일로 나누고, Claude는 지금 필요한 단계 파일만 읽는다. 원본이 템플릿이기 때문에, 같은 원본으로 나눈 판과 합친 판을 둘 다 만들 수 있다.
+
+### 근거
+
+**1. 이름 규칙: `X.md.tmpl`에서 `X.md`가 나온다.** 생성기는 `.md.tmpl`로 끝나는 파일을 찾아서 `.tmpl`만 떼고 결과 파일 이름을 정한다(`scripts/discover-skills.ts`의 `discoverSectionTemplates`). 원본도 내용은 Markdown이라 그대로 읽고 고칠 수 있다. `.tmpl`은 "이 파일이 원본이다"라는 표시다.
+
+**2. 자리표시가 실제로 무엇을 하는가.** 템플릿 안에서 `{{이름}}` 모양으로 쓴다. 많이 쓰는 것은 다음과 같다(저장소 전체 `.tmpl` 기준 등장 횟수).
+
+| 자리표시 | 횟수 | 생성 결과 |
+|---|---|---|
+| `{{SECTION:id}}` | 70 | 단계 파일을 읽으라는 안내, 또는 단계 내용 전체 |
+| `{{PREAMBLE}}` | 57 | 모든 스킬의 공통 시작 절차 |
+| `{{SECTION_INDEX:skill}}` | 25 | "어떤 상황에 어느 단계 파일을 읽는가" 표 |
+| `{{BASE_BRANCH_DETECT}}` | 15 | 기본 브랜치(main/master 등) 찾는 절차 |
+
+**3. 나눠 읽기: 필요한 단계만 읽는다.** 근거: `scripts/resolvers/sections.ts` 첫 주석, `autoplan/sections/manifest.json`
+
+`/autoplan`을 예로 든다. `autoplan/SKILL.md.tmpl`의 300번째 줄에 `{{SECTION:design-phase}}`가 있다. Claude용으로 생성하면 이 자리에 다음 안내가 들어간다.
+
+> **STOP.** Before starting Phase 2 (design review — ONLY if UI scope was detected in Phase 0; skip the read entirely otherwise), Read `.../autoplan/sections/design-phase.md` and execute it
+
+화면(UI)이 없는 작업이면 Claude는 디자인 단계 파일(약 8.5KB)을 아예 읽지 않는다. DX 단계(약 10KB)도 같다. 단계별 파일 목록, 제목, 읽는 조건은 `manifest.json` 한곳에만 적는다. `{{SECTION_INDEX}}`가 이 목록으로 상황별 표를 만든다.
+
+공통 시작 절차도 같은 방식이다. `{{PREAMBLE}}`의 공통 부분은 `sections/preamble.md`(autoplan 기준 약 22KB) 한 파일로 만들어지고, Claude는 한 세션에서 이 파일을 한 번만 읽는다(`ARCHITECTURE.md`, `scripts/resolvers/preamble-hoist.ts`).
+
+**4. 같은 원본으로 나눈 판과 합친 판을 만든다.** Claude는 단계 파일을 그때그때 읽을 수 있어서 나눈 판을 받는다. 다른 AI 도구에는 단계 파일 경로 문제가 있어서, 같은 `{{SECTION:id}}` 자리에 단계 내용 전체를 넣은 합친 판을 만든다. 다만 합친 판이 160KB(약 4만 토큰, `SKILL_BYTE_CEILING`)를 넘는 스킬(`ship`, `office-hours` 등)은 모든 도구에서 나눈 판을 쓴다. 생성 결과가 이 한도를 넘으면 생성기가 경고한다(`scripts/gen-skill-docs.ts`).
+
+### 비용
+
+원본과 결과물 두 벌을 관리해야 한다. 원본을 고친 뒤 `bun run gen:skill-docs`를 돌리고 둘 다 커밋해야 한다. 결과물을 직접 고치면 다음 생성 때 사라진다. gstack은 이 실수를 테스트로 잡는다(`test/gen-skill-docs.test.ts` 등).
+
+### 사용자 상황에 적용할 때
+
+- 템플릿이 이득이 되는 조건은 셋이다. 같은 문구를 여러 문서에 반복할 때, 코드나 데이터에서 값을 가져와야 할 때, 같은 내용을 여러 형태로 내보내야 할 때다. 셋 중 하나도 해당하지 않으면 그냥 `.md`가 낫다. 생성 단계와 관리할 파일만 늘어난다.
+- 사용자에게 가장 가까운 경우는 "같은 내용을 여러 형태로 내보내기"다. 개발 중 문서 하나에서 docx와 위키를 만드는 일이 여기에 해당한다(결정 현황 D2).
+- 나눠 읽기는 Claude에게 긴 분석·설계 문서를 줄 때도 쓸 수 있다. 큰 문서 하나보다 목차 파일과 단계별 파일로 나누고, 목차에 "언제 어느 파일을 읽는가"를 적어 두면 Claude가 필요한 부분만 읽는다. 이 방식에는 템플릿이 없어도 된다. 템플릿이 필요한 것은 나눈 판과 합친 판을 둘 다 만들어야 할 때뿐이다.
