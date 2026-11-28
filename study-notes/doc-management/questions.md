@@ -17,3 +17,4 @@
 | 11 | decisions.jsonl,learnings.jsonl 파일을 사용하는 목적과 json 을 추가하는 순서와 읽는 순서는 어떻게 되어 있어? | [07. JSONL 기록 — decisions.jsonl과 learnings.jsonl](07-jsonl-stores.md#4-decisionsjsonl과-learningsjsonl) |
 | 12 | /ship 단계에서 한꺼번에 정리하는 것이 무엇인지 궁금해. | [06. /ship에서 한꺼번에 정리하는 것](06-change-flow-files-and-skills.md#ship에서-한꺼번에-정리하는-것) |
 | 13 | gstack 에서 정규식으로 섹션 제목을 찾는 이유는 무엇인지 궁금해. | [08. 정규식으로 섹션 제목을 찾는 이유](08-regex-vs-judgment.md) |
+| 14 | gstack 에서 문서 작성에 사용하는 파일의 종류를 보여줘. | [09. gstack이 문서 작성에 쓰는 파일 종류](09-doc-file-types.md) |

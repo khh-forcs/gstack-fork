@@ -36,6 +36,7 @@ gstack 저장소가 문서와 폴더 구조를 어떤 기준과 의도로 만들
 | 06 | 설계 변경이 처리되는 흐름: 바뀌는 파일 순서와 호출하는 스킬 순서, /ship에서 한꺼번에 정리하는 것 | [06-change-flow-files-and-skills.md](06-change-flow-files-and-skills.md) |
 | 07 | gstack의 JSONL 기록: 용도, 동시 쓰기, 순서, 계산 방식 | [07-jsonl-stores.md](07-jsonl-stores.md) |
 | 08 | 정규식으로 섹션 제목을 찾는 이유 (기계 검사와 판단의 구분) | [08-regex-vs-judgment.md](08-regex-vs-judgment.md) |
+| 09 | gstack이 문서 작성에 쓰는 파일 종류 | [09-doc-file-types.md](09-doc-file-types.md) |
 
 ## 결정 현황
 
